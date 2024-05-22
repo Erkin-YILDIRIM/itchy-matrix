@@ -1,54 +1,52 @@
 #include <stdio.h>
 
-int matrice[6][6] = {{1,0,0,0,0,0}, {0,1,0,1,1,1}, {0,0,1,0,1,0}, {1,1,0,0,1,0}, {1,0,1,1,0,0}, {1,0,0,0,0,1}};
+int matrix[6][6] = {{1,0,0,0,0,0}, {0,1,0,1,1,1}, {0,0,1,0,1,0}, {1,1,0,0,1,0}, {1,0,1,1,0,0}, {1,0,0,0,0,1}};
 
-int i, j, k, l;
+int loop0, loop1, loop2, loop3;
 
 int flag0 = 0;
 
-void print(int arg_matrice[6][6]){
-	for(i = 0; i<6; i++){
-		for(j = 0; j<6; j++){
-			printf("%d ", arg_matrice[i][j]);
+void print(int arg_matrix[6][6]){
+	for(loop0 = 0; loop0<6; loop0++){
+		for(loop1 = 0; loop1<6; loop1++){
+			printf("%d ", arg_matrix[loop0][loop1]);
 		}
 		printf("\n");
 	}
 }
 
-(int*)[6] func(int arg_matrice[6][6]){ 
-	for(i = 0; i<6; i++){
-		for(j = 0; j<6; j++){
-			if((i!=0) && (j!=0) && (i!=5) && (j!=5)){
+int func(int arg_matrix[6][6]){ 
+	for(loop0 = 0; loop0<6; loop0++){
+		for(loop1 = 0; loop1<6; loop1++){
+			if((loop0!=0) && (loop1!=0) && (loop0!=5) && (loop1!=5)){
 				//our neighbourhoods are [i-1][j-1] to [i+1][j+1] excluding [i][j] itself
 				flag0 = 0;
-				for(k=i-1; k<=i+1; k++){
-					for(l=j-1; l<=j+1; l++){
-						if(!((k==i) && (l==j))){
-							if((arg_matrice[k][l]==1) && ((k == 0)||(l == 0)|| (k == 5)||(l == 5))){
+				for(loop2=loop0-1; loop2<=loop0+1; loop2++){
+					for(loop3=loop1-1; loop3<=loop1+1; loop3++){
+						if(!((loop2==loop0) && (loop3==loop1))){
+							if((arg_matrix[loop2][loop3]==1) && ((loop2 == 0)||(loop3 == 0)|| (loop2 == 5)||(loop3 == 5))){
 								
-								k = i+1; l= j+1;
+								loop2 = loop0+1; loop3= loop1+1;
 								flag0 = 1;
 								
 							}
 						}
 					}
 				}
-				if((flag0!=1) && (arg_matrice[i][j]==1)){
-					arg_matrice[i][j] = 0;
+				if((flag0!=1) && (arg_matrix[loop0][loop1]==1)){
+					arg_matrix[loop0][loop1] = 0;
 					flag0 = 0;
 				}
 			}
 		}
 		
 	}
-	return arg_matrice;
-	
 }
 
 int main() {
-	print(matrice);
+	print(matrix);
 	printf("\n");
-	func(matrice);
-	print(matrice);
+	func(matrix);
+	print(matrix);
 	return 0;
 }
